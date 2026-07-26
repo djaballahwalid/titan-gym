@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-charcoal-dark text-white font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Glassmorphism utility */
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  /* Premium Gold Gradient Text */
+  .text-gold-gradient {
+    @apply bg-gradient-to-r from-gold-dark via-gold-light to-gold-dark bg-clip-text text-transparent;
+  }
+
+  /* Gold Button */
+  .btn-gold {
+    @apply bg-gold text-charcoal-dark font-bold py-3 px-8 rounded-full transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] uppercase tracking-wider text-sm;
+  }
+
+  /* Outline Button */
+  .btn-outline {
+    @apply border border-white/30 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:bg-white hover:text-charcoal-dark uppercase tracking-wider text-sm;
+  }
+
+  /* Section Padding */
+  .section-padding {
+    @apply py-20 md:py-32 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #AA8C2C;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
