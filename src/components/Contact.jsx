@@ -22,7 +22,7 @@ const handleChange = (e) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-
+console.log("Le formulaire est envoyé !");
   setLoading(true);
 
   const { error } = await supabase
@@ -76,28 +76,57 @@ const handleSubmit = async (e) => {
             transition={{ duration: 0.6 }}
             className="glass p-8 rounded-2xl"
           >
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">First Name</label>
-                  <input type="text" className="w-full bg-charcoal-dark border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-gold transition-colors" />
+                  <input
+  type="text"
+  name="prenom"
+  value={formData.prenom}
+  onChange={handleChange}
+  className="w-full bg-charcoal-dark border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-gold transition-colors"
+/>
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Last Name</label>
-                  <input type="text" className="w-full bg-charcoal-dark border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-gold transition-colors" />
+                  <input
+  type="text"
+  name="nom"
+  value={formData.nom}
+  onChange={handleChange}
+  className="w-full bg-charcoal-dark border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-gold transition-colors"
+/>
                 </div>
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-2">Email</label>
-                <input type="email" className="w-full bg-charcoal-dark border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-gold transition-colors" />
+                <input
+  type="email"
+  name="email"
+  value={formData.email}
+  onChange={handleChange}
+  className="w-full bg-charcoal-dark border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-gold transition-colors"
+/>
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-2">Message</label>
-                <textarea rows="4" className="w-full bg-charcoal-dark border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-gold transition-colors"></textarea>
+                <textarea
+  rows="4"
+  name="message"
+  value={formData.message}
+  onChange={handleChange}
+  className="w-full bg-charcoal-dark border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-gold transition-colors"
+/>
               </div>
-              <button type="submit" className="btn-gold w-full flex items-center justify-center gap-2">
-                Send Message <Send size={16} />
-              </button>
+   <button
+  type="submit"
+  disabled={loading}
+  className="btn-gold w-full flex items-center justify-center gap-2"
+>
+  {loading ? "Sending..." : "Send Message"}
+  {!loading && <Send size={16} />}
+</button>
             </form>
 
             <div className="mt-8 pt-8 border-t border-white/10 space-y-4">
