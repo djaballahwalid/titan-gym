@@ -1,8 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { supabase } from "../lib/supabase";
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+  prenom: "",
+  nom: "",
+  email: "",
+  message: "",
+});
+
+const [loading, setLoading] = useState(false);
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  setLoading(true);
+
+  const { error } = await supabase
+    .from("CONTACTS")
+    .insert([
+      {
+        prenom: formData.prenom,
+        nom: formData.nom,
+        email: formData.email,
+        message: formData.message,
+      },
+    ]);
+
+  setLoading(false);
+
+  if (error) {
+    alert("Erreur : " + error.message);
+  } else {
+    alert("Votre message a été envoyé !");
+    setFormData({
+      prenom: "",
+      nom: "",
+      email: "",
+      message: "",
+    });
+  }
+};
   return (
     <section id="contact" className="bg-charcoal py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
